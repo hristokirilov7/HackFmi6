@@ -86,18 +86,18 @@ void testMotors ()
 }
 
 
- virtual class GearMotors
+ class GearMotors
  {
  private:
- 	virtual int Motor1E;
- 	virtual int Motor1A;
- 	virtual int Motor1B;
+ 	static int Motor1E;
+ 	static int Motor1A;
+ 	static int Motor1B;
 
- 	virtual int Motor2E;
- 	virtual int Motor2A;
- 	virtual int Motor2;
+ 	static int Motor2E;
+ 	static int Motor2A;
+ 	static int Motor2;
  public:
- 	virtual void instance()
+ 	static void instance()
  	{
  		wiringPiSetupGpio();
  		Motor1E = 27;
@@ -117,7 +117,7 @@ void testMotors ()
  		pinMode(Motor1E, OUTPUT);
  	}
 
- 	virtual void forward (unsigned time = 1000)
+ 	static void forward (unsigned time = 1000)
  	{
  		digitalWrite(Motor1E, 1);
  		digitalWrite(Motor1A, 1);
@@ -136,7 +136,7 @@ void testMotors ()
  		}
  	}
 
- 	virtual void backward (unsigned time = 1000)
+ 	static void backward (unsigned time = 1000)
  	{
  		digitalWrite(Motor1A, 1);
  		digitalWrite(Motor1B, 1);
@@ -155,7 +155,7 @@ void testMotors ()
  		}
  	}
 
- 	virtual void stop ()
+ 	static void stop ()
  	{
  		digitalWrite(Motor1A, 0);
  		digitalWrite(Motor1B, 0);
