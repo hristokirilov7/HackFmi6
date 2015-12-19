@@ -223,7 +223,7 @@ int main() {
 	bool flag = 1;
 	while (flag)
 	{
-	if (testSensor.measure() <= 200)
+	if (testSensor.measure() <= 5)
 		{
 			delay(3000);
 			flag = 0;
