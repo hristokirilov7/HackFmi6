@@ -6,7 +6,7 @@
 #include <softPwm.h>
 using namespace std;
 
-int Motor1E = 27;
+/*int Motor1E = 27;
 int Motor1A = 17;
 int Motor1B = 18;
 
@@ -14,12 +14,12 @@ int Motor1B = 18;
 int Motor2E = 26;
 int Motor2A = 13;// ## 19 13
 int Motor2B = 19;//#26
-
+*/
 //sensor
 int TRIG = 23;
 int ECHO = 24;
 
-
+/*
 void testMotors ()
 {
 	pinMode(Motor1A, OUTPUT);
@@ -59,7 +59,7 @@ void testMotors ()
 
 	digitalWrite(Motor1A,0);
 	digitalWrite(Motor2E,0);
-}
+}*/
 
 
  void testSensor ()
