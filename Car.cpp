@@ -20,7 +20,7 @@ int Motor2B = 19;//#26
 int TRIG = 23;
 int ECHO = 24;
 
-
+/*
 void testMotors ()
 {
 	pinMode(Motor1A, OUTPUT);
@@ -32,15 +32,17 @@ void testMotors ()
 	pinMode(Motor2E, OUTPUT);
 
 	printf("Going forwards\n");
-	digitalWrite(Motor1E, 1);
+
+
+{	digitalWrite(Motor1E, 1);
 	digitalWrite(Motor1A, 1);
 	digitalWrite(Motor1B, 0);
 
 	digitalWrite(Motor2E, 1);
 	digitalWrite(Motor2A, 1);
 	digitalWrite(Motor2B, 0);
-
-	delay(1000);
+}
+	delay(5000);
 
 	digitalWrite(Motor1E,0);
 	digitalWrite(Motor2E,0);
@@ -56,18 +58,18 @@ void testMotors ()
 
 	delay(1000);
 
-	digitalWrite(Motor1E,0);
+	digitalWrite(Motor1A,0);
 	digitalWrite(Motor2E,0);
-}
+}*/
 
 
-/* void testSensor ()
+ void testSensor ()
 {
 	pinMode(TRIG, OUTPUT);
 	pinMode(ECHO, INPUT);
-
+/*
 	//Settle Sensor
-	digitalWrite(TRIG, 1);
+	digitalWrite(TRIG, 0);
 	delay (2000);
 
 
@@ -76,20 +78,44 @@ void testMotors ()
 	delayMicroseconds(10);
 	digitalWrite(TRIG, 0);
 
-	time_t start, end;
-	while (digitalRead(ECHO) == 0)
-		start = clock();
+	clock_t start, end;
 	while (digitalRead(ECHO) == 1)
+		start = clock();
+//	start = clock();
+	while (digitalRead(ECHO) == 0)
 		end = clock();
+	printf("%lu",end);
+	printf("\n");
+	printf("%lu",start);
 	double duration = (end - start) / 1000000.0;
 	double distance = duration * 17150;
-	cout << distance << endl;
-}*/
+//	printf("%f", distance);
+
+	digitalWrite(TRIG,0);
+	digitalWrite(ECHO,0);
+*/
+	digitalWrite(TRIG,0);
+	delay(30);
+
+	digitalWrite(TRIG, 1);
+	delayMicroseconds(20);
+	digitalWrite(TRIG,0);
+
+	while(digitalRead(ECHO) == 0);
+
+	long startTime = micros();
+	while (digitalRead(ECHO) == 1);
+	long travelTime = micros() - startTime;
+
+	//get distance
+	int distance = travelTime / 58;
+	printf("%d", distance);
+}
 
 int main() {
 	wiringPiSetupGpio();
-	testMotors();
-	//testSensor();
+	//testMotors();
+	testSensor();
 
 	return 0;
 }
