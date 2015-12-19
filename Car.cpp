@@ -218,7 +218,7 @@ int main() {
 	
 	DistanceSensor testSensor;
 
-	testMotors.forward(3000);
+	testMotors.forward(0);
 
 	bool flag = 1;
 	while (flag)
