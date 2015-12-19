@@ -1,5 +1,4 @@
 
-//####
 #include <stdio.h>
 #include <time.h>
 #include <wiringPi.h>
@@ -20,7 +19,7 @@ int Motor2B = 19;//#26
 int TRIG = 23;
 int ECHO = 24;
 
-/*
+
 void testMotors ()
 {
 	pinMode(Motor1A, OUTPUT);
@@ -60,40 +59,14 @@ void testMotors ()
 
 	digitalWrite(Motor1A,0);
 	digitalWrite(Motor2E,0);
-}*/
+}
 
 
  void testSensor ()
 {
 	pinMode(TRIG, OUTPUT);
 	pinMode(ECHO, INPUT);
-/*
-	//Settle Sensor
-	digitalWrite(TRIG, 0);
-	delay (2000);
 
-
-	//Test
-	digitalWrite(TRIG, 1);
-	delayMicroseconds(10);
-	digitalWrite(TRIG, 0);
-
-	clock_t start, end;
-	while (digitalRead(ECHO) == 1)
-		start = clock();
-//	start = clock();
-	while (digitalRead(ECHO) == 0)
-		end = clock();
-	printf("%lu",end);
-	printf("\n");
-	printf("%lu",start);
-	double duration = (end - start) / 1000000.0;
-	double distance = duration * 17150;
-//	printf("%f", distance);
-
-	digitalWrite(TRIG,0);
-	digitalWrite(ECHO,0);
-*/
 	digitalWrite(TRIG,0);
 	delay(30);
 
@@ -112,9 +85,91 @@ void testMotors ()
 	printf("%d", distance);
 }
 
+
+ virtual class GearMotors
+ {
+ private:
+ 	virtual int Motor1E;
+ 	virtual int Motor1A;
+ 	virtual int Motor1B;
+
+ 	virtual int Motor2E;
+ 	virtual int Motor2A;
+ 	virtual int Motor2;
+ public:
+ 	virtual void instance()
+ 	{
+ 		wiringPiSetupGpio();
+ 		Motor1E = 27;
+ 		Motor1A = 17;
+ 		Motor1B = 18;
+
+ 		Motor2E = 26;
+ 		Motor2A = 13;
+ 		Motor2B = 19;
+
+ 		pinMode(Motor1A, OUTPUT);
+ 		pinMode(Motor1B, OUTPUT);
+ 		pinMode(Motor1E, OUTPUT);
+
+ 		pinMode(Motor1A, OUTPUT);
+ 		pinMode(Motor1B, OUTPUT);
+ 		pinMode(Motor1E, OUTPUT);
+ 	}
+
+ 	virtual void forward (unsigned time = 1000)
+ 	{
+ 		digitalWrite(Motor1E, 1);
+ 		digitalWrite(Motor1A, 1);
+ 		digitalWrite(Motor1B, 0);
+
+ 		digitalWrite(Motor2E, 1);
+ 		digitalWrite(Motor2A, 1);
+ 		digitalWrite(Motor2B, 0);
+
+ 		if (time != 0)
+ 		{
+ 			delay(time);
+
+ 			digitalWrite(Motor1E,0);
+ 			digitalWrite(Motor2E,0);
+ 		}
+ 	}
+
+ 	virtual void backward (unsigned time = 1000)
+ 	{
+ 		digitalWrite(Motor1A, 1);
+ 		digitalWrite(Motor1B, 1);
+ 		digitalWrite(Motor1E, 0);
+
+ 		digitalWrite(Motor2A, 0);
+ 		digitalWrite(Motor2B, 1);
+ 		digitalWrite(Motor2E, 1);
+
+ 		if (time != 0)
+ 		{
+ 			delay (time);
+
+ 			digitalWrite(Motor1A,0);
+ 			digitalWrite(Motor2E,0);
+ 		}
+ 	}
+
+ 	virtual void stop ()
+ 	{
+ 		digitalWrite(Motor1A, 0);
+ 		digitalWrite(Motor1B, 0);
+ 		digitalWrite(Motor1E, 0);
+
+ 		digitalWrite(Motor2A, 0);
+ 		digitalWrite(Motor2B, 0);
+ 		digitalWrite(Motor2E, 0);
+ 	}
+ };
+
 int main() {
 	wiringPiSetupGpio();
-	//testMotors();
+	testMotors();
 	testSensor();
 
 	return 0;
