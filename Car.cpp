@@ -215,13 +215,12 @@ int main() {
 	//testMotors();
 	//testSensor();
 	GearMotors testMotors;
-	testMotors.forward(0);
 	
-
 	DistanceSensor testSensor;
-	testSensor.measure();
 
-	if (testSensor.measure() == 15) {
+	testMotors.forward(3000);
+
+	if (testSensor.measure() <= 15) {
 		delay(3000);
 		testMotors.backward(3000);
 	}
