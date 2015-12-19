@@ -161,7 +161,20 @@ public:
 		digitalWrite(Motor1A, 0);
 		digitalWrite(Motor2B, 0);
 	}
+	void turnRight()
+	{
+		digitalWrite(Motor1A, 0);
+		digitalWrite(Motor1B, 1);
+		digitalWrite(Motor1E, 1);
 
+		digitalWrite(Motor2A, 1);
+		digitalWrite(Motor2B, 0);
+		digitalWrite(Motor2E, 1);
+
+		delay(2000);
+		digitalWrite(Motor1A, 0);
+		digitalWrite(Motor2B, 0);
+	}
 	void stop() {
 		digitalWrite(Motor1A, 0);
 		digitalWrite(Motor1B, 0);
@@ -218,16 +231,17 @@ int main() {
 	
 	DistanceSensor testSensor;
 
-	testMotors.forward(0);
+	//testMotors.forward(0);
 
 	bool flag = 1;
 	while (flag)
 	{
 	if (testSensor.measure() <= 5)
 		{
-			delay(3000);
-			flag = 0;
-			testMotors.backward(3000);
+			printf("5 cm");
+		//	delay(3000);
+		//	flag = 0;
+		//	testMotors.backward(3000);
 		}
 	}
 	return 0;
