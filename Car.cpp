@@ -220,9 +220,15 @@ int main() {
 
 	testMotors.forward(3000);
 
-	if (testSensor.measure() <= 15) {
-		delay(3000);
-		testMotors.backward(3000);
+	bool flag = 1;
+	while (flag)
+	{
+	if (testSensor.measure() <= 200) {
+		{
+			delay(3000);
+			flag = 0;
+			testMotors.backward(3000);
+		}
 	}
 	return 0;
 }
