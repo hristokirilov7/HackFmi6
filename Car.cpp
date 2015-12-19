@@ -156,6 +156,7 @@ public:
 		digitalWrite(Motor2B, 0);
 		digitalWrite(Motor2E, 0);
 	}
+
 };
 
 class DistanceSensor {
@@ -200,11 +201,14 @@ int main() {
 	//testSensor();
 	GearMotors testMotors;
 	testMotors.forward(0);
-	delay(3000);
-	testMotors.backward(3000);
+	
 
 	DistanceSensor testSensor;
 	testSensor.measure();
 
+	if (testSensor.measure() == 15) {
+		delay(3000);
+		testMotors.backward(3000);
+	}
 	return 0;
 }
