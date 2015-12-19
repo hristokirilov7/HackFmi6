@@ -89,35 +89,35 @@ void testMotors ()
  class GearMotors
  {
  private:
- 	static int Motor1E;
- 	static int Motor1A;
- 	static int Motor1B;
+ 	int Motor1A;
+ 	int Motor1B;
+ 	int Motor1E;
 
- 	static int Motor2E;
- 	static int Motor2A;
- 	static int Motor2;
+ 	int Motor2A;
+ 	int Motor2B;
+ 	int Motor2E;
  public:
- 	static void instance()
+ 	GearMotors()
  	{
- 		wiringPiSetupGpio();
- 		Motor1E = 27;
+ 		//wiringPiSetupGpio();
  		Motor1A = 17;
  		Motor1B = 18;
+ 		Motor1E = 27;
 
- 		Motor2E = 26;
  		Motor2A = 13;
  		Motor2B = 19;
+ 		Motor2E = 26;
 
  		pinMode(Motor1A, OUTPUT);
  		pinMode(Motor1B, OUTPUT);
  		pinMode(Motor1E, OUTPUT);
 
- 		pinMode(Motor1A, OUTPUT);
- 		pinMode(Motor1B, OUTPUT);
- 		pinMode(Motor1E, OUTPUT);
+ 		pinMode(Motor2A, OUTPUT);
+ 		pinMode(Motor2B, OUTPUT);
+ 		pinMode(Motor2E, OUTPUT);
  	}
 
- 	static void forward (unsigned time = 1000)
+ 	void forward (unsigned time = 1000)
  	{
  		digitalWrite(Motor1E, 1);
  		digitalWrite(Motor1A, 1);
@@ -136,7 +136,7 @@ void testMotors ()
  		}
  	}
 
- 	static void backward (unsigned time = 1000)
+ 	void backward (unsigned time = 1000)
  	{
  		digitalWrite(Motor1A, 1);
  		digitalWrite(Motor1B, 1);
@@ -155,7 +155,7 @@ void testMotors ()
  		}
  	}
 
- 	static void stop ()
+ 	void stop ()
  	{
  		digitalWrite(Motor1A, 0);
  		digitalWrite(Motor1B, 0);
@@ -169,8 +169,12 @@ void testMotors ()
 
 int main() {
 	wiringPiSetupGpio();
-	testMotors();
-	testSensor();
+	//testMotors();
+	//testSensor();
+	GearMotors test;
+	test.forward(0);
+	delay(5000);
+	test.backward(5000);
 
 	return 0;
 }
