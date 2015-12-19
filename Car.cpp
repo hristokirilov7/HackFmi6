@@ -58,7 +58,7 @@ using namespace std;
 
  digitalWrite(Motor1A,0);
  digitalWrite(Motor2E,0);
- }*/
+ }
 
 void testSensor() {
 	pinMode(TRIG, OUTPUT);
@@ -83,7 +83,7 @@ void testSensor() {
 	int distance = travelTime / 58;
 	printf("%d", distance);
 }
-
+*/
 class GearMotors {
 private:
 	int Motor1A;
@@ -190,6 +190,7 @@ public:
 		//get distance
 		int distance = travelTime / 58;
 		printf("%d", distance);
+		return distance;
 	}
 };
 
@@ -199,8 +200,8 @@ int main() {
 	//testSensor();
 	GearMotors testMotors;
 	testMotors.forward(0);
-	delay(5000);
-	testMotors.backward(5000);
+	delay(3000);
+	testMotors.backward(3000);
 
 	DistanceSensor testSensor;
 	testSensor.measure();
