@@ -122,8 +122,18 @@ public:
 		digitalWrite(Motor2B, 0);
 		digitalWrite(Motor2E, 1);
 
+		unsigned duration = 0;
+		while (duration <= time || time == 0)
+		{
+			delay (2000);
+			digitalWrite(Motor1E, 0);
+			delay(100);
+			digitalWrite(Motor1E, 1);
+			duration += 2000;
+		}
+		delay(time - duration);
 		if (time != 0) {
-			delay(time);
+			//delay(time);
 
 			digitalWrite(Motor1E, 0);
 			digitalWrite(Motor2E, 0);
@@ -217,20 +227,16 @@ int main() {
 	GearMotors testMotors;
 	
 	DistanceSensor testSensor;
-	testMotors.forward(100s0);
-	testMotors.turnLeft();
-	testMotors.forward(5000);
-	/*testMotors.forward(0);
 
+	testMotors.forward(0);
 	bool flag = 1;
 	while (flag)
 	{
-	if (testSensor.measure() <= 5)
+		if (testSensor.measure() <= 20)
 		{
-			delay(3000);
 			flag = 0;
-			testMotors.backward(3000);
+			testMotors.stop();
 		}
-	}*/
+	}
 	return 0;
 }

@@ -197,7 +197,24 @@ public:
 		pinMode(ECHO, INPUT);
 
 		digitalWrite(TRIG, 0);
-		delay(30);
+		delay(30);digitalWrite(Motor1B, 0);
+		digitalWrite(Motor1E, 1);
+
+		digitalWrite(Motor2A, 0);
+		digitalWrite(Motor2B, 1);
+		digitalWrite(Motor2E, 1);
+
+		delay (2000);
+		digitalWrite(Motor1A, 0);
+		digitalWrite(Motor2B, 0);
+	}
+
+	void stop() {
+		digitalWrite(Motor1A, 0);
+		digitalWrite(Motor1B, 0);
+		digitalWrite(Motor1E, 0);
+
+		digitalWrite(
 	}
 	int measure ()
 	{
