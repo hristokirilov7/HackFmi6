@@ -197,24 +197,7 @@ public:
 		pinMode(ECHO, INPUT);
 
 		digitalWrite(TRIG, 0);
-		delay(30);digitalWrite(Motor1B, 0);
-		digitalWrite(Motor1E, 1);
-
-		digitalWrite(Motor2A, 0);
-		digitalWrite(Motor2B, 1);
-		digitalWrite(Motor2E, 1);
-
-		delay (2000);
-		digitalWrite(Motor1A, 0);
-		digitalWrite(Motor2B, 0);
-	}
-
-	void stop() {
-		digitalWrite(Motor1A, 0);
-		digitalWrite(Motor1B, 0);
-		digitalWrite(Motor1E, 0);
-
-		digitalWrite(
+		delay(30);
 	}
 	int measure ()
 	{
@@ -246,13 +229,16 @@ int main() {
 	DistanceSensor testSensor;
 
 	testMotors.forward(0);
+
 	bool flag = 1;
 	while (flag)
 	{
-		if (testSensor.measure() <= 20)
+	if (testSensor.measure() <= 5)
 		{
-			flag = 0;
-			testMotors.stop();
+			printf("5 cm");
+		//	delay(3000);
+		//	flag = 0;
+		//	testMotors.backward(3000);
 		}
 	}
 	return 0;
