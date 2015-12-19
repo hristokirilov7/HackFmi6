@@ -26,8 +26,8 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 		from subprocess import call
 		call(["./car", "args", "to", "car"])
 
-	if __name__ == "__main__":
-    	HOST, PORT = "10.0.201.48", 5011
+if __name__ == "__main__":
+    HOST, PORT = "10.0.201.48", 5011
 
     # Create the server, binding to localhost on port 9999
     server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
