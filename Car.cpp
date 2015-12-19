@@ -122,8 +122,18 @@ public:
 		digitalWrite(Motor2B, 0);
 		digitalWrite(Motor2E, 1);
 
+		unsigned duration = 0;
+		while (duration <= time || time == 0)
+		{
+			delay (2000);
+			digitalWrite(Motor1E, 0);
+			delay(100);
+			digitalWrite(Motor1E, 1);
+			duration += 2000;
+		}
+		delay(time - duration);
 		if (time != 0) {
-			delay(time);
+			//delay(time);
 
 			digitalWrite(Motor1E, 0);
 			digitalWrite(Motor2E, 0);
