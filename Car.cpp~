@@ -58,7 +58,7 @@ using namespace std;
 
  digitalWrite(Motor1A,0);
  digitalWrite(Motor2E,0);
- }*/
+ }
 
 void testSensor() {
 	pinMode(TRIG, OUTPUT);
@@ -83,7 +83,7 @@ void testSensor() {
 	int distance = travelTime / 58;
 	printf("%d", distance);
 }
-
+*/
 class GearMotors {
 private:
 	int Motor1A;
@@ -114,13 +114,13 @@ public:
 	}
 
 	void forward(unsigned time = 1000) {
-		digitalWrite(Motor1E, 1);
 		digitalWrite(Motor1A, 1);
 		digitalWrite(Motor1B, 0);
+		digitalWrite(Motor1E, 1);
 
-		digitalWrite(Motor2E, 1);
 		digitalWrite(Motor2A, 1);
 		digitalWrite(Motor2B, 0);
+		digitalWrite(Motor2E, 1);
 
 		if (time != 0) {
 			delay(time);
@@ -147,6 +147,21 @@ public:
 		}
 	}
 
+	void turnLeft ()
+	{
+		digitalWrite(Motor1A, 1);
+		digitalWrite(Motor1B, 0);
+		digitalWrite(Motor1E, 1);
+
+		digitalWrite(Motor2A, 0);
+		digitalWrite(Motor2B, 1);
+		digitalWrite(Motor2E, 1);
+
+		delay (2000);
+		digitalWrite(Motor1A, 0);
+		digitalWrite(Motor2B, 0);
+	}
+
 	void stop() {
 		digitalWrite(Motor1A, 0);
 		digitalWrite(Motor1B, 0);
@@ -156,6 +171,7 @@ public:
 		digitalWrite(Motor2B, 0);
 		digitalWrite(Motor2E, 0);
 	}
+
 };
 
 class DistanceSensor {
@@ -190,6 +206,7 @@ public:
 		//get distance
 		int distance = travelTime / 58;
 		printf("%d", distance);
+		return distance;
 	}
 };
 
@@ -198,12 +215,22 @@ int main() {
 	//testMotors();
 	//testSensor();
 	GearMotors testMotors;
-	testMotors.forward(0);
-	delay(5000);
-	testMotors.backward(5000);
-
+	
 	DistanceSensor testSensor;
-	testSensor.measure();
+	testMotors.forward(100s0);
+	testMotors.turnLeft();
+	testMotors.forward(5000);
+	/*testMotors.forward(0);
 
+	bool flag = 1;
+	while (flag)
+	{
+	if (testSensor.measure() <= 5)
+		{
+			delay(3000);
+			flag = 0;
+			testMotors.backward(3000);
+		}
+	}*/
 	return 0;
 }

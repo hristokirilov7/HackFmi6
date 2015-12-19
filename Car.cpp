@@ -219,15 +219,13 @@ int main() {
 	DistanceSensor testSensor;
 
 	testMotors.forward(0);
-
 	bool flag = 1;
 	while (flag)
 	{
-	if (testSensor.measure() <= 5)
+		if (testSensor.measure() <= 20)
 		{
-			delay(3000);
 			flag = 0;
-			testMotors.backward(3000);
+			testMotors.stop();
 		}
 	}
 	return 0;
