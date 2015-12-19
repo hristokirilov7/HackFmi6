@@ -1,5 +1,6 @@
+
 //####
-#include <stdlib>
+#include <stdio.h>
 #include <time.h>
 #include <wiringPi.h>
 #include <piFace.h>
@@ -26,9 +27,9 @@ void testMotors ()
 	pinMode(Motor1B, OUTPUT);
 	pinMode(Motor1E, OUTPUT);
 
-	pinMode(Motor1A, OUTPUT);
-	pinMode(Motor1B, OUTPUT);
-	pinMode(Motor1E, OUTPUT);
+	pinMode(Motor2A, OUTPUT);
+	pinMode(Motor2B, OUTPUT);
+	pinMode(Motor2E, OUTPUT);
 
 	printf("Going forwards\n");
 	digitalWrite(Motor1E, 1);
@@ -60,7 +61,7 @@ void testMotors ()
 }
 
 
-void testSensor ()
+/* void testSensor ()
 {
 	pinMode(TRIG, OUTPUT);
 	pinMode(ECHO, INPUT);
@@ -83,7 +84,7 @@ void testSensor ()
 	double duration = (end - start) / 1000000.0;
 	double distance = duration * 17150;
 	cout << distance << endl;
-}
+}*/
 
 int main() {
 	wiringPiSetupGpio();
