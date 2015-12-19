@@ -73,8 +73,8 @@ void testSensor ()
 
 int main() {
 	wiringPiSetup();
-	//testMotors();
-	testSensor();
+	testMotors();
+	//testSensor();
 
 	return 0;
 }
