@@ -205,6 +205,7 @@ public:
 		//get distance
 		int distance = travelTime / 58;
 		printf("%d", distance);
+		return distance;
 	}
 };
 
@@ -214,8 +215,8 @@ int main() {
 	//testSensor();
 	GearMotors testMotors;
 	testMotors.forward(0);
-	delay(5000);
-	testMotors.backward(5000);
+	delay(3000);
+	testMotors.backward(3000);
 
 	DistanceSensor testSensor;
 	testSensor.measure();
