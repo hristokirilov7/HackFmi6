@@ -184,7 +184,14 @@ public:
 		digitalWrite(Motor2B, 0);
 		digitalWrite(Motor2E, 0);
 	}
-
+	void testMotor() 
+	{
+		forward(2000);
+		backward(2000);
+		turnLeft();
+		turnRight(); 
+		stop(); 
+	}
 };
 
 class DistanceSensor {
