@@ -1,4 +1,5 @@
-#include <iostream>
+//####
+#include <stdlib>
 #include <time.h>
 #include <wiringPi.h>
 #include <piFace.h>
@@ -21,7 +22,15 @@ int ECHO = 24;
 
 void testMotors ()
 {
-	cout << "Going forwards\n";
+	pinMode(Motor1A, OUTPUT);
+	pinMode(Motor1B, OUTPUT);
+	pinMode(Motor1E, OUTPUT);
+
+	pinMode(Motor1A, OUTPUT);
+	pinMode(Motor1B, OUTPUT);
+	pinMode(Motor1E, OUTPUT);
+
+	printf("Going forwards\n");
 	digitalWrite(Motor1E, 1);
 	digitalWrite(Motor1A, 1);
 	digitalWrite(Motor1B, 0);
@@ -32,8 +41,10 @@ void testMotors ()
 
 	delay(1000);
 
+	digitalWrite(Motor1E,0);
+	digitalWrite(Motor2E,0);
 
-	cout << "Going forwards\n";
+	printf("Going backwards\n");
 	digitalWrite(Motor1A, 1);
 	digitalWrite(Motor1B, 1);
 	digitalWrite(Motor1E, 0);
@@ -43,6 +54,9 @@ void testMotors ()
 	digitalWrite(Motor2E, 1);
 
 	delay(1000);
+
+	digitalWrite(Motor1E,0);
+	digitalWrite(Motor2E,0);
 }
 
 
@@ -72,7 +86,7 @@ void testSensor ()
 }
 
 int main() {
-	wiringPiSetup();
+	wiringPiSetupGpio();
 	testMotors();
 	//testSensor();
 
