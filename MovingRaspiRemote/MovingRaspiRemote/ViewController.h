@@ -14,19 +14,23 @@
     NSOutputStream *_outputStream;
 }
 
-@property(nonatomic, strong) IBOutlet UITextField *host;
-@property(nonatomic, strong) IBOutlet UITextField *port;
-@property(nonatomic, strong) IBOutlet UIButton *connect;
-@property(nonatomic, strong) IBOutlet UIButton *disconnect;
-@property(nonatomic, strong) IBOutlet UILabel *status;
+//@property(nonatomic, strong) IBOutlet UITextField *host;
+//@property(nonatomic, strong) IBOutlet UITextField *port;
+//@property(nonatomic, strong) IBOutlet UIButton *connect;
+//@property(nonatomic, strong) IBOutlet UIButton *disconnect;
+//@property(nonatomic, strong) IBOutlet UILabel *status;
+ //@property (weak, nonatomic) IBOutlet UITextView *goFront;
 
-- (IBAction)doConnect:(id)sender;
-- (IBAction)doDisconnect:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *forwardTextField;
+
+//- (IBAction)doConnect:(id)sender;
+//- (IBAction)doDisconnect:(id)sender;
 
 - (IBAction)goForward:(id)sender;
 - (IBAction)goReverse:(id)sender;
 - (IBAction)turnLeft:(id)sender;
 - (IBAction)turnRight:(id)sender;
+
 
 - (IBAction)stop:(id)sender;
 

@@ -21,11 +21,13 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         print self.data
         # just send back the same data, but upper-cased
         self.request.sendall(self.data.upper())
-        if self.data == '1' :
+        if self.data == 'forward' :
          #   execfile('Car.cpp')
-		from subprocess import call
-		call(["./car", "args", "to", "car"])
-
+		    from subprocess import call
+		    call(["./forward", "args", "to", "forward"])
+        else if self.data == 'stop'
+            from subprocess import call
+            call(["./stop", "args", "to", "stop"])
 if __name__ == "__main__":
     HOST, PORT = "10.0.201.48", 5011
 
