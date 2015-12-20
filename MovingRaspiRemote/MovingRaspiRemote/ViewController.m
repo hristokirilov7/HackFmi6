@@ -26,20 +26,7 @@
     [super viewDidLoad];
     
     self.forwardTextField.delegate = self;
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnView:)];
-    [self.view addGestureRecognizer:tap];
-    
-    CFReadStreamRef readStream;
-    CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)CFBridgingRetain(@"10.0.201.48"), [@"5011" intValue], &readStream, &writeStream);
-    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
-    
-    [_outputStream setDelegate:self];
-    
-    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [_outputStream open];
+    [self sender];
     
     
 	// Do any additional setup after loading the view, typically from a nib.
@@ -56,6 +43,22 @@
 //    }
 
 }
+
+
+- (void)sender{
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)CFBridgingRetain(@"10.0.201.48"), [@"5011" intValue], &readStream, &writeStream);
+    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
+    
+    [_outputStream setDelegate:self];
+    
+    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [_outputStream open];
+}
+
 
 - (void)tapOnView:(UITapGestureRecognizer *)sender
 {
@@ -105,14 +108,17 @@
 - (IBAction)goForward:(id)sender {
     NSString *response  = @"forward";
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-	[_outputStream write:[data bytes] maxLength:[data length]];
+    [self sender];
+    [_outputStream write:[data bytes] maxLength:[data length]];
 }
 
 
 - (IBAction)goReverse:(id)sender {
-    NSString *response  = @"reverse";
+    NSString *response  = @"stop";
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+    [self sender];
 	[_outputStream write:[data bytes] maxLength:[data length]];
+   //   [self sender];
 }
 
 
@@ -129,11 +135,11 @@
 	[_outputStream write:[data bytes] maxLength:[data length]];
 }
 
-- (IBAction)stop:(id)sender {
-    NSString *response  = @"stop";
-	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-	[_outputStream write:[data bytes] maxLength:[data length]];
-}
+//- (IBAction)stop:(id)sender {
+//    NSString *response  = @"stop";
+//	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+//	[_outputStream write:[data bytes] maxLength:[data length]];
+//}
 
 
 

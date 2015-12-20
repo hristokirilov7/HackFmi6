@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
                 <outlet property="forwardTextField" destination="df5-z1-GiV" id="4wT-51-atl"/>
-                <outlet property="stopButton" destination="48E-Rz-TVt" id="jOg-Vd-dTY"/>
                 <outlet property="view" destination="6" id="7"/>
             </connections>
         </placeholder>
@@ -74,16 +73,6 @@
                         <action selector="moveForward:" destination="-1" eventType="editingDidEnd" id="8Mx-1s-rAB"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="48E-Rz-TVt">
-                    <rect key="frame" x="137" y="327" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="Stop"/>
-                    <connections>
-                        <action selector="stop:" destination="-1" eventType="touchUpInside" id="lhL-CU-vJT"/>
-                        <action selector="stopButton:" destination="-1" eventType="touchUpInside" id="6zl-L2-SOf"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
