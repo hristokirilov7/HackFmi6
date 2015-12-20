@@ -42,10 +42,33 @@ void goToDirection(int x, int y) {
 				y -= (90 - angle) / 90 * coveredDistance;
 
 				if (xPositive) {
-					motors.turnRight(90-angle);
+					motors.turnRight(90 - angle);
+					motors.forward(x);
+					motors.turnLeft(90);
+					if (sensor.measure() <= 50)
+					{
+						motors.turnRight(90);
+						motors.forward(1000);
+						motors.turnLeft(90);
+						if (sensor.measure() <= 50)
+						{
+							motors.turnLeft(90);
+							motors.forward(2000+x);
+							motors.turnRight(90);
+							goToDirection((x+1000)/50,y/50);
+						}
+						else
+							goToDirection(-1000/50,y/50);
+					}
+					else
+					{
+						goToDirection(0, y/50);
+					}
+
 				} else {
-					motors.turnLeft(90-angle);
+					motors.turnLeft(90 - angle);
 					x *= -1;
+					//goToDirection();
 
 				}
 
