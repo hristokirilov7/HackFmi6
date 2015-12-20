@@ -129,7 +129,6 @@
 	[_outputStream write:[data bytes] maxLength:[data length]];
 }
 
-
 - (IBAction)stop:(id)sender {
     NSString *response  = @"stop";
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
