@@ -26,7 +26,18 @@
     [super viewDidLoad];
     
     self.forwardTextField.delegate = self;
-    [self sender];
+    
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)CFBridgingRetain(@"10.0.201.48"), [@"5011" intValue], &readStream, &writeStream);
+    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
+    
+    [_outputStream setDelegate:self];
+    
+    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [_outputStream open];
     
     
 	// Do any additional setup after loading the view, typically from a nib.
@@ -43,22 +54,6 @@
 //    }
 
 }
-
-
-- (void)sender{
-    CFReadStreamRef readStream;
-    CFWriteStreamRef writeStream;
-    
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)CFBridgingRetain(@"10.0.201.48"), [@"5011" intValue], &readStream, &writeStream);
-    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
-    
-    [_outputStream setDelegate:self];
-    
-    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [_outputStream open];
-}
-
 
 - (void)tapOnView:(UITapGestureRecognizer *)sender
 {
@@ -106,17 +101,17 @@
 #pragma mark - Actions
 
 - (IBAction)goForward:(id)sender {
+   // [self sender];
     NSString *response  = @"forward";
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-    [self sender];
     [_outputStream write:[data bytes] maxLength:[data length]];
 }
 
 
 - (IBAction)goReverse:(id)sender {
+   // [self sender];
     NSString *response  = @"stop";
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-    [self sender];
 	[_outputStream write:[data bytes] maxLength:[data length]];
    //   [self sender];
 }
