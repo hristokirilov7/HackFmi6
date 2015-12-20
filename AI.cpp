@@ -34,10 +34,14 @@ void goToDirection(int x, int y) {
 		if (distance < 1000) {
 			distanceRange = distance;
 		}
+
 		motors.forward(0);
+
 		if (distanceCounter % 2 == 0) {
 			distanceToObject = sensor.measure();
+
 			if (distanceToObject <= 50 && distance > distanceToObject) {
+
 				x -= angle / 90 * coveredDistance;
 				y -= (90 - angle) / 90 * coveredDistance;
 
@@ -45,35 +49,48 @@ void goToDirection(int x, int y) {
 					motors.turnRight(90 - angle);
 					motors.forward(x);
 					motors.turnLeft(90);
-					if (sensor.measure() <= 50)
-					{
+
+					if (sensor.measure() <= 50) {
 						motors.turnRight(90);
 						motors.forward(1000);
 						motors.turnLeft(90);
-						if (sensor.measure() <= 50)
-						{
+
+						if (sensor.measure() <= 50) {
 							motors.turnLeft(90);
-							motors.forward(2000+x);
+							motors.forward(2000 + x);
 							motors.turnRight(90);
-							goToDirection((x+1000)/50,y/50);
+							return goToDirection((x + 1000) / 50, y / 50);
+						} else {
+							return goToDirection(-1000 / 50, y / 50);
 						}
-						else
-							goToDirection(-1000/50,y/50);
-					}
-					else
-					{
-						goToDirection(0, y/50);
+
+					} else {
+						return goToDirection(0, y / 50);
 					}
 
 				} else {
 					motors.turnLeft(90 - angle);
-					x *= -1;
-					//goToDirection();
+					motors.forward(x);
+					motors.turnRight(90);
 
+					if (sensor.measure() <= 50) {
+						motors.turnLeft(90);
+						motors.forward(1000);
+						motors.turnRight(90);
+
+						if (sensor. measure() <= 50) {
+							motors.turnRight(90);
+							motors.forward(2000 + x);
+							motors.turnLeft(90);
+							return goToDirection((x + 1000) / -50, y / 50);
+						} else {
+							return goToDirection(1000 / 50, y / 50);
+						}
+					} else {
+						return goToDirection(0, y / 50);
+					}
 				}
 
-				motors.stop();
-				return;
 			}
 		}
 		delay(distanceRange);
@@ -91,6 +108,6 @@ void convertToInt(string numbers) {
 
 int main() {
 	wiringPiSetupGpio();
-	goToDirection(50, 100);
+	goToDirection(-50, 100);
 	return 0;
 }

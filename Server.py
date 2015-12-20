@@ -25,7 +25,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
          #   execfile('Car.cpp')
 		    from subprocess import call
 		    call(["./forward", "args", "to", "forward"])
-        else if self.data == 'stop'
+        elif self.data == 'stop' :
             from subprocess import call
             call(["./stop", "args", "to", "stop"])
 if __name__ == "__main__":
